@@ -7,9 +7,11 @@ RUN npm ci
 
 # Stage 2: Build
 FROM node:20-alpine AS builder
+RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN mkdir -p public
 RUN npm run build
 
 # Stage 3: Production
