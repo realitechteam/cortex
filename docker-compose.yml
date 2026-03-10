@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  cortex:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_PATH=/app/data/cortex.db
+      - UPLOAD_DIR=/app/uploads
+    volumes:
+      - cortex-data:/app/data
+      - cortex-uploads:/app/uploads
+    restart: unless-stopped
+
+volumes:
+  cortex-data:
+  cortex-uploads:
